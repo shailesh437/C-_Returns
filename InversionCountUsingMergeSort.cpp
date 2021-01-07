@@ -18,9 +18,6 @@ int merge(int A[],int *temp,int start,int midpoint,int end){
 		temp[k++]=A[left_ptr++];
 	while(right_ptr<=end)
 		temp[k++]=A[right_ptr++];
-
-	for(int p=start;p<=end;p++)
-		A[p]=temp[p];
 	return inv_count;
 }
 int invCountByMergeSort(int A[],int *temp,int start,int end){
@@ -37,5 +34,7 @@ int main(){
 	int A[]={5,3,4,2,1};
 	int *temp = new int[sizeof(A)/sizeof(A[0])];
 	cout<<invCountByMergeSort(A,temp,0,(sizeof(A)/sizeof(A[0]))-1);
+	//The temp array has the sorted numbers.
+	//If we wish to overwrite the main array it can be done here
 	return 0;
 }
