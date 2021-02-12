@@ -21,7 +21,21 @@ int getMaxProfit(int start,int end,int startyear){
 	return ans;
 }
 
+int getMaxProfit_dp(int start,int end,int startyear,int dp[][100]){
+	if(start>end){
+		return 0;
+	}
+	if(dp[start][end]!=0) 
+		return dp[start][end];
+	int ans = max(   price_wines[start]*startyear+getMaxProfit(start+1,end,startyear+1),
+				 price_wines[end]*startyear+getMaxProfit(start,end-1,startyear+1)
+			);	 
+
+	return dp[start][end]=ans;
+}
+
 int main(){
-	int dp[100]={0};	
+	int dp[100][100]={0};	
 	cout<<"\nans = "<<getMaxProfit(0,4,1);
+	cout<<"\nans = "<<getMaxProfit_dp(0,4,1,dp);
 }
