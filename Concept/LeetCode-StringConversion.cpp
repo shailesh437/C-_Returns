@@ -9,14 +9,16 @@ bool checkIfCanBeTransformed(string s1,string s2){
 		return false;
 	}
 	unordered_map<char,char> charMap;
+	unordered_set<char> s;
 	for(int i=0;i<s1.length();i++){
 		if(charMap.find(s1[i])!=charMap.end() and s1[i]!=s2[i]){
 			return false;
 		}
 		charMap[s1[i]]=s2[i];
+		s.insert(charMap[s1[i]]);
 	}
 
-	return charMap.size()<26;
+	return s.size()<26;
 }
 
 int main(){
