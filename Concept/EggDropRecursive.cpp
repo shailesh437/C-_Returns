@@ -1,3 +1,7 @@
+//Note that since its using recursion, time-complexity is exponential
+//If we give 100 floors, the program would not come out
+//to avoud such problems we should go for DP way
+
 #include<iostream>
 using namespace std;
 int solveEggDropRec(int Eggs,int Floors){
