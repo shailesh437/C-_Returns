@@ -41,6 +41,7 @@ int main(){
 			int x,y;
 			cin>>x>>y;
 			graph[x].pb(y);
+			graph[y].pb(x);
 		}
 		vector<int> parent(n+1,-1);
 		memset(dp,-1,sizeof dp);
