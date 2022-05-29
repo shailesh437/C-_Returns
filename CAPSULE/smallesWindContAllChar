@@ -1,0 +1,182 @@
+#include<bits/stdc++.h>
+#define ll long long int
+#define vi vector<ll> 
+#define pb push_back
+#define inf 1e18
+#define loop(i,a,b) for(int i=a;i<=b;i++)
+#define logarr(arr,a,b)	for(int z=(a);z<=(b);z++) cout<<(arr[z])<<" ";cout<<endl;
+using namespace std;
+void file_i_o()
+{
+	ios_base::sync_with_stdio(0); 
+	cin.tie(0); 
+	cout.tie(0);
+    #ifndef ONLINE_JUDGE
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
+    #endif
+}
+void print_(vector<char> matchChars){
+	cout<<endl;
+	for(char x:matchChars) cout<<x<<" ";
+	cout<<endl;		
+}
+void print_(multimap<char, int> mm){
+	multimap<char, int>::iterator itr;
+	cout<<endl<<"==================\n";
+	for(itr = mm.begin(); itr != mm.end(); ++itr){
+		cout << '\t' << itr->first << '\t' << itr->second
+			<< '\n';
+	}
+	cout<<endl<<"==================\n";
+}
+void print_(unordered_map<char, int> mm){
+	unordered_map<char, int>::iterator itr;
+	cout<<endl<<"==================\n";
+	for(itr = mm.begin(); itr != mm.end(); ++itr){
+		cout << '\t' << itr->first << '\t' << itr->second
+			<< '\n';
+	}
+	cout<<endl<<"==================\n";
+}
+
+string smallestWindow (string S, string P)
+    {
+        // Your code here
+        int startIndex,endIndex;
+        int ans = INT_MAX;
+        int P_freq[256]={0}; 
+        int count=0;
+        for(int i=0;i<P.length();i++){
+        	if(P_freq[P[i]]==0){
+        		count++;
+        	}
+        	P_freq[P[i]]++;
+        }
+        int i=0,j=0;
+        //travsers
+        while(j<S.length()){
+        	P_freq[S[j]]--;
+        	if(P_freq[S[j]] == 0){
+        		count--;
+        	}
+        	while(count==0){
+        		if(ans>(j-i+1)){
+        			ans = j-i+1; 
+        			startIndex = i;	
+        			endIndex = j;
+        		}
+        		P_freq[S[i]]++;
+        		if(P_freq[S[i]]>0){
+        			count++;
+        		}
+        		i++;
+        	}
+        	j++;
+        }
+        if(ans != INT_MAX)
+        return S.substr(startIndex,endIndex-startIndex+1);
+
+    	return "-1";
+    }
+    int main(){
+    	clock_t begin = clock();
+    	file_i_o();
+    	int TC=1;
+    	while(TC--){
+    		string S,P;
+    		cin>>S>>P;
+    		cout<<smallestWindow(S,P); 
+		}//eow
+	 #ifndef ONLINE_JUDGE 
+clock_t end = clock();
+cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";
+    #endif 
+return 0;
+}
+
+/*
+int main1(){
+	clock_t begin = clock();
+	file_i_o();
+	int TC=1;
+	//cin>>TC;
+	while(TC--){
+		string S,P;
+		cin>>S>>P; 
+		/*multimap<char, int> patMap;
+		vector<char> matchChars;
+		map<char, int> uniqPatMap;
+		map<char, int> uniqScharMap;
+		for(int i=0;i<P.length();i++){
+			//patMap.insert(pair<char,int>(P[i],1));
+			uniqPatMap[P[i]]++;
+		}
+
+		//multimap<char, int>::iterator itr;
+		/*for (itr = patMap.begin(); itr != patMap.end(); ++itr) {
+			cout << '\t' << itr->first << '\t' << itr->second
+			<< '\n';
+		}
+		cout<<endl<<patMap.size()<<endl;
+		cout << endl; 
+		
+		int j = -1 ; //pattern index tracker	
+		//multimap<char, int>::iterator itr;	
+		int startIndex=-1,endIndex;
+		int minLength = INT_MAX;
+		vector<char> window;
+		int char_match=0;
+
+		
+		for(int i=0;i<S.length();i++){
+			window.push_back(S[i]);
+			//cout<<endl<<"2.0::"<<uniqPatMap[S[i]];
+			if( uniqPatMap.find(S[i]) != uniqPatMap.end()){				
+				uniqScharMap[S[i]]++;
+				if(uniqPatMap[S[i]] == uniqScharMap[S[i]]){
+				char_match++;
+				}
+			}
+			//cout<<"\n 0 :"<<uniqPatMap.size();
+			
+
+			while(char_match == uniqPatMap.size()){
+				j++;
+				if( (i-j) < minLength){
+					minLength = (i-j);
+					startIndex = j;
+					endIndex = i; 
+				}
+				if(uniqScharMap[S[j]]>0)
+					uniqScharMap[S[j]]--;
+				
+				//cout<<"\n 0 :"<<uniqPatMap.size();
+
+				if( uniqPatMap.find(S[j]) != uniqPatMap.end() 
+					and 
+					(uniqScharMap[S[j]] < uniqPatMap[S[j]] )){
+					char_match--;
+				}
+				if(uniqScharMap[S[j]] == 0){
+					uniqScharMap.erase(S[j]);
+				}
+				window.erase(window.begin());	
+				//cout<<endl<<"1--"<<char_match;
+				//cout<<endl<<"2--"<<uniqPatMap.size();
+				//break;
+
+			} 
+
+		}
+		cout<<endl<<"startIndex = "<<startIndex; 
+		cout<<endl<<"endIndex = "<<endIndex; 
+		cout<<endl<<S.substr(startIndex,endIndex-startIndex+1);
+
+	}//eow
+	 #ifndef ONLINE_JUDGE 
+clock_t end = clock();
+cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";
+    #endif 
+return 0;
+}*/
