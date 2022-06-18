@@ -44,7 +44,34 @@ class Solution{
 	return main_ans_V;
     }
 };
-
+ vector<vector<int> > fourSum(vector<int> &arr, int k) { //optimized 
+        // Your code goes here
+    set<vector<int>> main_ans;
+	sort(arr.begin(),arr.end());  
+	for(int i=0;i<=arr.size()-4;i++){ 
+		for(int j=i+1;j<=arr.size()-3;j++){
+		    int start=j+1;
+		    int end = arr.size()-1;
+		    int partialSum=arr[i]+arr[j];
+		    while(start<end){ 
+		        if( (partialSum+arr[start]+arr[end])==k){
+		            
+		            vector<int> v1(4);
+		            v1[0]=arr[i];v1[1]=arr[j];
+		            v1[2]=arr[start];v1[3]=arr[end];
+		            main_ans.insert(v1);
+		            v1.clear();
+		            start++;
+		            end--;
+		        }else if(partialSum+arr[start]+arr[end]<k) start++;
+		        else end--;
+		    }
+		 
+		}   
+	}  
+	vector<vector<int>> main_ans_V(main_ans.begin(),main_ans.end());
+	return main_ans_V;
+    }
 // { Driver Code Starts.
 int main() {
     int t;
