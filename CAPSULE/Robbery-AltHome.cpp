@@ -24,7 +24,7 @@ int FindMaxSum(int arr[], int n)
 	}
 	if(n==1)
 		return arr[0];
-	
+
 	int arr_run[n][3]; 
 
 	arr_run[0][0]=arr[0];
@@ -44,6 +44,29 @@ int FindMaxSum(int arr[], int n)
  
 	return max(arr_run[n-1][1],arr_run[n-1][2]);
 }
+int findSum1(int arr[],int n){
+	int dp[n+1];
+	dp[0]=0;
+	dp[1]=arr[0];
+	for(int i=2;i<=n;i++)
+		dp[i]=max(arr[i-1]+dp[i-2],dp[i-1]);
+
+	return dp[n];
+}
+
+int findSum2(int arr[],int n){
+	if(n==1)
+		return arr[0];
+	int prev=max(arr[1],arr[0]);
+	int prevprev=arr[0];
+	 for(int i=2;i<n;i++){
+ 		int current = max(arr[i]+prevprev,prev);
+ 		prevprev=prev;
+ 		prev=current;
+ 		cout<<endl<<prev<<"---"<<prevprev<<"--"<<current;
+	} 
+	return max(prev,prevprev);
+}
 int main(){
 	clock_t begin = clock();
 	file_i_o();
@@ -54,7 +77,11 @@ int main(){
 		//int a[] = {5,5,10,100,10,5};
 		int n = 9;
 		int a[] = {8,6,4,10,2,8,10,1,30};
-		cout<<FindMaxSum(a,n);
+		/*cout<<FindMaxSum(a,n);
+		cout<<endl;
+		cout<<findSum1(a,n);
+		cout<<endl;
+		*/cout<<findSum2(a,n);
 	}
 	 #ifndef ONLINE_JUDGE 
 	clock_t end = clock();
