@@ -23,7 +23,7 @@ ll N,initial_strength;
 imp**************
 DP[current_city_no][trained_in_Gym_count] denotes 
 the maximum EV that can be gained if starts from 
-current_cty_no and trained_inGym_count
+current_cty_no and trained in (  trained_inGym_count) times 
 */
 
 ll getMax_XV(ll current_city_no, ll trained_in_Gym_count){
