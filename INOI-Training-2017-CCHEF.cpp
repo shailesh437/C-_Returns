@@ -1,3 +1,6 @@
+https://discuss.codechef.com/t/tinoi17b-editorial/48436/2
+
+
 #include <bits/stdc++.h>
 #define ll long long int
 using namespace std;
